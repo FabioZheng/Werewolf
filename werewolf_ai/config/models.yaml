@@ -1,0 +1,13 @@
+models:
+  - id: openai/gpt-4o-mini
+    label: GPT-4o Mini
+  - id: anthropic/claude-3.5-haiku
+    label: Claude 3.5 Haiku
+  - id: google/gemini-flash-1.5
+    label: Gemini Flash 1.5
+  - id: meta-llama/llama-3.1-70b-instruct
+    label: Llama 3.1 70B Instruct
+  - id: mistralai/mistral-large
+    label: Mistral Large
+  - id: deepseek/deepseek-chat
+    label: DeepSeek Chat

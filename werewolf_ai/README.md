@@ -7,11 +7,14 @@ Research platform for running deterministic Werewolf/Mafia simulations where LLM
    ```bash
    pip install -r werewolf_ai/requirements.txt
    ```
-2. Create `.env`:
+2. Create `.env` in repo root (a mock template is included) and set your real key:
    ```bash
-   OPENROUTER_API_KEY=your_key_here
+   OPENROUTER_API_KEY=your_real_key_here
+   OPENROUTER_HTTP_REFERER=https://your-app.example
+   OPENROUTER_X_TITLE=Werewolf AI Benchmark
    ```
-3. Model list is editable in `werewolf_ai/config/models.yaml`.
+3. The project loads `.env` automatically using `python-dotenv` when initializing the OpenRouter client.
+4. Model list is editable in `werewolf_ai/config/models.yaml`.
 
 ## Run
 - One simulation programmatically: import `run_once` from `werewolf_ai/run_simulation.py`.

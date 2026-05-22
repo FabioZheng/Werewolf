@@ -5,7 +5,10 @@ import os
 import time
 from typing import Any
 
+from dotenv import load_dotenv
 from openai import OpenAI
+
+load_dotenv()
 
 
 class OpenRouterClient:
@@ -13,14 +16,31 @@ class OpenRouterClient:
         api_key = os.environ.get("OPENROUTER_API_KEY")
         if not api_key:
             raise RuntimeError("Missing OPENROUTER_API_KEY")
-        headers = {}
-        if referer:
-            headers["HTTP-Referer"] = referer
-        if title:
-            headers["X-Title"] = title
-        self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key, default_headers=headers or None)
 
-    def complete_json(self, model_id: str, system_prompt: str, user_prompt: str, temperature: float, max_tokens: int, timeout: float = 60.0) -> tuple[dict[str, Any], int]:
+        resolved_referer = referer or os.environ.get("OPENROUTER_HTTP_REFERER")
+        resolved_title = title or os.environ.get("OPENROUTER_X_TITLE")
+
+        headers = {}
+        if resolved_referer:
+            headers["HTTP-Referer"] = resolved_referer
+        if resolved_title:
+            headers["X-Title"] = resolved_title
+
+        self.client = OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=api_key,
+            default_headers=headers or None,
+        )
+
+    def complete_json(
+        self,
+        model_id: str,
+        system_prompt: str,
+        user_prompt: str,
+        temperature: float,
+        max_tokens: int,
+        timeout: float = 60.0,
+    ) -> tuple[dict[str, Any], int]:
         start = time.time()
         response = self.client.chat.completions.create(
             model=model_id,

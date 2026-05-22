@@ -1,0 +1,13 @@
+roles:
+  villager:
+    team: village
+    description: Public-information role with no night action.
+  werewolf:
+    team: werewolf
+    description: Eliminates one player each night with teammates.
+  seer:
+    team: village
+    description: Inspects one player each night.
+  doctor:
+    team: village
+    description: Protects one player each night from elimination.
